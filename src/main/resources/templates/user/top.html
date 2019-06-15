@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: base_header('マイページTOP',~{::link},~{::script},~{::meta})">
+<meta name="description" th:attr="content=${username}+のマイページのTOP画面です。">
+<meta name="keywords" content="テクノパッド,Technopad,てくのぱっど,テクニック,ハウツー,方法,やり方">
+<link href="/css/pc_user_common.css" th:href="@{/css/pc_user_common.css}" rel="stylesheet">
+<script src="/js/pc_user_common.js" th:src="@{/js/pc_user_common.js}"></script>
+</head>
+<body>
+<div th:replace="layout/header::header"></div>
+<div class="box-wrap">
+	<div th:replace="layout/sidebarleft::sidebarleft"></div>
+	<div class="liquid" id="liquid">
+		<div th:replace="layout/userheader::userheader"></div>
+		<div th:replace="layout/usernavi::usernavi"></div>
+		<div class="userpage-title">
+			<h1>マイページTOP</h1>
+		</div>
+	</div>
+</div>
+</body>
+</html>

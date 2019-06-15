@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="pc/layout/pc_layout::base_header(~{::title},~{::link},~{::script},~{::meta})">
+<title th:text="${username}+'のマイカテゴリリスト'+ '／テクノパッド'">title</title>
+<meta name="description" th:attr="content=${username}+のカテゴリリスト画面です。">
+<meta name="keywords" content="テクノパッド,Technopad,てくのぱっど,テクニック,ハウツー,方法,やり方">
+<link href="/css/pc/pc_user_common.css" th:href="@{/css/pc/pc_user_common.css}" rel="stylesheet">
+<script src="/js/pc/pc_user_common.js" th:src="@{/js/pc/pc_user_common.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+function confirmSubmit() {
+    if (window.confirm("削除します。よろしいですか？") == true) {
+        return true;
+    }
+    return false;
+}
+	
+window.addEventListener('DOMContentLoaded', function() {
+
+})
+/*]]>*/
+</script>
+</head>
+<body>
+<div th:replace="pc/layout/pc_header::header"></div>
+<div class="content-wrap">
+	<div th:replace="pc/layout/pc_navigation::navigation"></div>
+	<div class="liquid" id="liquid">
+		<div class="liquid-content">
+			<div th:replace="pc/layout/pc_userheader::userheader('カテゴリ')"></div>
+			<div class="content-box">
+				<div class="content-box-head">
+					<h1>カテゴリリスト</h1>
+					<p>全 <span th:text="${listCategory.size()}">000</span> 件</p>
+					<a class="right-btn-link" href="/user/category/create" th:href="@{/user/category/create}">新規作成</a>
+				</div>
+				
+				<!-- カテゴリ1件以上あり -->
+				<th:block th:if="${listCategory.size() > 0}">
+					<div class="content-box-detail-4">
+						<div class="category-list-content">
+							<div class="category-list-label">
+								<div class="column-1"></div>
+								<div class="column-2">カテゴリ名</div>
+								<div class="column-3">追加日時</div>
+								<div class="column-4">更新日時</div>
+								<div class="column-5">テクニック数</div>
+								<div class="column-6">編集</div>
+								<div class="column-7">削除</div>
+							</div>
+							<div class="category-row" th:each="category : ${listCategory}">
+								<div class="column-1">
+									<img src="/images/icon_folder@2x.png" th:src="@{/images/icon_folder@2x.png}" width="35" height="35">
+								</div>
+								<div class="column-2"><a href="'/user/category/edit/'+${category.id}" th:href="@{'/user/category/edit/'+${category.id}}" th:text="${category.name}"></a></div>
+								<div class="column-3">
+									<p th:text="${#dates.format(category.addtimestamp, 'yyyy/MM/dd')}"></p>
+									<p th:text="${#dates.format(category.addtimestamp, 'h:mm:ss')}"></p>
+								</div>
+								<div class="column-4">
+									<p th:text="${#dates.format(category.updtimestamp, 'yyyy/MM/dd')}"></p>
+									<p th:text="${#dates.format(category.updtimestamp, 'h:mm:ss')}"></p>
+								</div>
+								<div class="column-5" th:text="${category.cntTech}">1234</div>
+								<div th:if="${category.user.id != 0}" class="column-6"><a href="'/user/category/edit/'+${category.id}" th:href="@{'/user/category/edit/'+${category.id}}">編集</a></div>
+								 
+								 <th:block th:if="${category.user.id != 0}">
+								 	<div class="column-7" >
+										<form class="column-7" method="POST" th:action="@{/user/category/delete/{id}(id=${category.id})}">
+											<input type="submit" value="削除" onclick="return confirmSubmit();">
+										</form>
+								 	</div>
+								</th:block>
+							</div>
+						</div>
+					</div>
+				</th:block>
+				
+				<!-- カテゴリ0件 -->
+				<th:block th:if="${listCategory.size() == 0}">
+					<div class="content-box-detail-2">
+						<p class="no-category">現在カテゴリは作成されていません。</p>
+					</div>
+				</th:block>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

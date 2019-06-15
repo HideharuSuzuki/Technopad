@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="pc/layout/pc_layout::base_header(~{::title},~{::link},~{::script},~{::meta})">
+<title th:text="${username}+'のカテゴリ新規作成'+ '／テクノパッド'">title</title>
+<meta name="description" th:attr="content=${username}+のカテゴリ新規作成画面です。">
+<meta name="keywords" content="テクノパッド,Technopad,てくのぱっど,テクニック,ハウツー,方法,やり方">
+<link href="/css/pc/pc_user_common.css" th:href="@{/css/pc/pc_user_common.css}" rel="stylesheet">
+<script src="/js/pc/pc_user_common.js" th:src="@{/js/pc/pc_user_common.js}"></script>
+</head>
+<body>
+<div th:replace="pc/layout/pc_header::header"></div>
+<div class="content-wrap">
+	<div th:replace="pc/layout/pc_navigation::navigation"></div>
+	<div class="liquid" id="liquid">
+		<div class="liquid-content">
+			<div th:replace="pc/layout/pc_userheader::userheader('カテゴリ')"></div>
+			<div class="content-box">
+				<div class="content-box-head">
+					<a class="left-btn-link" href="/user/category/list" th:href="@{/user/category/list}">&#8592;</a>
+					<h1>カテゴリ新規作成</h1>
+				</div>
+				<div class="content-box-detail-2">
+					<p>カテゴリを作成すると、テクニックをカテゴリにまとめることができます(最大20個)</p>
+					<p class="ex">(例：「XXXXXのDIY教室」など)</p>
+					<br>
+					<form method="post" th:action="@{/user/category/create}" th:object="${categoryForm}">					
+						<p class="label">カテゴリ名</p>
+						<input type="text" name="name" th:field="*{name}" placeholder="30文字まで">
+						<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validate">error</span>
+						<span th:if="${#fields.hasErrors('err')}" th:errors="*{err}" class="validate">error</span>
+						<br>
+						<br>
+						<br>
+						<br>
+						<p><input type="submit" value="カテゴリ作成"></p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

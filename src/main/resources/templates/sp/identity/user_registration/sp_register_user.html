@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="sp/layout/sp_layout :: base_header(~{::title},~{::link},~{::script},~{::meta})">
+<title>ユーザー本登録／テクノパッド</title>
+<link href="/css/sp/sp_identity.css" th:href="@{/css/sp/sp_identity.css}" rel="stylesheet">
+<meta name="description" content="世界最大級のテクニック検索サイトです。自分で様々なテクニック・ハウツー・方法・やり方を検索・作成・公開することができます。">
+<meta name="keywords" content="テクノパッド,Technopad,てくのぱっど,テクニック,ハウツー,方法,やり方">
+<script src="/js/identity.js" th:src="@{/js/identity.js}"></script>
+</head>
+<body>
+<div th:replace="sp/layout/sp_header::header"></div>
+<div id="search-cover" class="search-cover" onclick="clickSearchBtn();"></div>
+<div th:replace="sp/layout/sp_navigation::navigation"></div>
+<div id="content-wrap" class="content-wrap">
+	<div class="content-box">
+		<div class="content-box-head">
+			<h1>ユーザー本登録</h1>
+		</div>
+		<div class="content-box-detail-2">
+			<p>ユーザー登録に必要な情報を入力してユーザー本登録を完了してください。</p>
+			<br>
+			<form method="post" th:action="@{/identity/user_registration}" th:object="${userForm}">
+				<input type="hidden" name="mailid" th:value="${mailid}">
+				<input type="hidden" name="uuid" th:value="${uuid}">
+				<p class="label">パスワード</p>
+				<input type="password" name="password" placeholder="6文字以上の半角英数">
+				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validate">error</span>
+				<br>
+				<p class="label">生年月日</p>
+				<div class="birthday">
+					<p class="selectWrap">
+						<select name="year_birth" class="year_birth" th:field="*{year_birth}" onchange="fncGetOptionDay();">
+							<option value="0">選択</option>
+							<option th:each="yyyy:${listYYYY}" th:value="${yyyy}" th:text="${yyyy}"></option>
+						</select>
+					</p>
+					<p>年</p>
+					<p class="selectWrap">
+						<select name="month_birth" class="month_birth"  th:field="*{month_birth}" onchange="fncGetOptionDay();">
+							<option value="0">選択</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>
+					</p>
+					<p>月</p>
+					<p class="selectWrap">
+						<select name="day_birth" class="day_birth" th:field="*{day_birth}">
+							<option value="0">選択</option>
+							<option th:each="dd:${listDD}" th:value="${dd}" th:text="${dd}"></option>
+						</select>
+					</p>
+					<p>日</p>
+					<br>
+				</div>
+				
+				<p><span th:if="${#fields.hasErrors('year_birth')}" th:errors="*{year_birth}" class="validate">error</span></p>
+				<p><span th:if="${#fields.hasErrors('month_birth')}" th:errors="*{month_birth}" class="validate">error</span></p>
+				<p><span th:if="${#fields.hasErrors('day_birth')}" th:errors="*{day_birth}" class="validate">error</span></p>
+				
+				<br>
+				
+				<p class="label">性別</p>
+				<p class="selectWrap">
+					<select name="gender" class="gender" th:field="*{gender}">
+						<option value="0">選択</option>
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
+				</p>
+				<p><span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="validate">error</span></p>
+				<br>
+				<p><input type="submit" value="入力した内容で登録"></p>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

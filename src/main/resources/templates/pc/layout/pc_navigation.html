@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:fragment="navigation" class="navigation" id="navigation">
+	
+	<nav>
+		<ul>
+			<li><a href="/" th:href="@{/}">ホーム</a></li>
+			<li><a href="/topic/list" th:href="@{/topic/list}">話題のテクニック</a></li>
+			<li><a href="/new/list" th:href="@{/new/list}">新しいテクニック</a></li>
+			
+			<!-- 非ログイン時 -->
+			<li sec:authorize="isAnonymous()">
+				<a class="email_registration" href="/identity/email_registration" th:href="@{/identity/email_registration}">ユーザー登録</a>
+			</li>
+			<li sec:authorize="isAnonymous()">
+				<a class="loginForm" href="/loginForm" th:href="@{/loginForm}">ログイン</a>
+			</li>
+			
+			<!-- ログイン時 -->
+			<li sec:authorize="isAuthenticated()">
+				<a class="username" href="/user/top" th:href="@{/user/top}" sec:authentication="principal.user.username" sec:authorize="isAuthenticated()">ユーザー名</a>
+			</li>
+			<li sec:authorize="isAuthenticated()">
+				<form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+					<input type="submit" class="submit-logout" value="ログアウト">
+				</form>
+			</li>
+	 	</ul>
+	</nav>
+	
+ 	<hr>
+	
+	<div class="sub-menu">
+		<p><a href="/terms" th:href="@{/terms}">利用規約</a></p>
+		<p><a href="/privacy" th:href="@{/privacy}">プライバシーポリシー</a></p>
+	</div>
+	
+</div>
+</html>

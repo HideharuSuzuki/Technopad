@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:fragment="header">
+		<div class="header-left">
+			<div class="header-left-content">
+				<div class="menu" onclick="clickHeaderMenu();">
+					<p>メニュー</p>
+				</div>
+				<a href="/" th:href="@{/}"></a>
+			</div>
+		</div>
+		<div class="header-center">
+			<form method="GET" action="/result">
+				<div class="header-center-content">
+					<input type="text" placeholder="テクニックを検索">
+					<input type="submit" value="">
+				</div>
+			</form>
+		</div>
+		<div class="header-right">
+			<div class="header-right-content">
+				<!-- ログイン時 -->
+				<p sec:authorize="isAuthenticated()" class="user-thumb"><a href="/user/top" th:href="@{/user/top}"><img th:src="@{/images/noimage_d@2x.jpg}"></a></p>
+				<p sec:authorize="isAuthenticated()" class="user-name"><a href="/user/top" th:href="@{/user/top}" sec:authentication="principal.user.username">ユーザー名</a></p>
+				<p sec:authorize="isAuthenticated()"><a href="/user/technique/create" th:href=@{/user/technique/create}>テクニック作成</a></p>
+				<!-- 非ログイン時 -->
+				<p sec:authorize="isAnonymous()"><a href="/identity/email_registration" th:href="@{/identity/email_registration}"  class="user-register">ユーザー登録</a></p>
+				<p sec:authorize="isAnonymous()"><a href="/loginForm" th:href="@{/loginForm}" class="login">ログイン</a></p>
+			</div>
+		</div>
+</header>
+</html>

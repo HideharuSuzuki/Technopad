@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:fragment="header">
+	<div class="header-upper">
+		<div class="header-logo">
+			<a href="/" th:href="@{/}"></a>
+		</div>
+		<div class="btn-search" onclick="clickSearchBtn();">
+			<p>検索</p>
+		</div>
+ 		<a sec:authorize="isAnonymous()" class="btn-register" href="/identity/email_registration" th:href="@{/identity/email_registration}"><span>登録</span></a>
+ 		<a sec:authorize="isAnonymous()" class="btn-login" href="/loginForm" th:href="@{/loginForm}"><span>ログイン</span></a>
+ 		<a sec:authorize="isAuthenticated()" class="btn-mypage" href="/user/top" th:href="@{/user/top}"><span>MyPage</span></a>
+ 		<div class="btn-menu" onclick="clickHeaderMenu();">
+			<p>メニュー</p>
+		</div>
+	</div>
+	<form method="GET" action="">
+		<div id="header-search" class="header-search">
+			<div class="header-search-content">
+				<input id="search-technique" type="text" placeholder="テクニックを検索">
+				<input type="submit" value="">
+			</div>
+		</div>
+	</form>
+</header>
+</html>

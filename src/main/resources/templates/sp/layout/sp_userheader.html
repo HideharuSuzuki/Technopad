@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:fragment="userheader(header_title)" class="userheader">
+	<div class="header-img">
+		<img src="images/noimage_c@2x.jpg" th:src="@{/images/noimage_c@2x.jpg}">
+	</div>
+	<div class="header-content">
+		<a class="thumb" href="/user/top" th:href="@{/user/top}"><img th:src="@{/images/noimage_b@2x.jpg}" width="50" height="50"></a>
+		<div>
+			<p class="username"><span sec:authentication="principal.user.username" sec:authorize="isAuthenticated()">ユーザー名</span> の<span th:text="${header_title}">title</span></p>			
+			<p class="follow"><a href=""><span>1000</span> フォロー</a></p>
+			<p class="follower"><a href=""><span>1000</span> フォロワー</a></p>
+		</div>
+	</div>
+	<div class="user-navigation">
+		<p class="left" id="left-btn">&lsaquo;</p>
+ 		<div class="user-navigation-menu" id="user-navigation-menu">
+			<ul>
+				<li><a href="/user/top" th:href="@{/user/top}"><span>TOP</span></a></li>
+				<li><a href="/user/technique/list" th:href="@{/user/technique/list}"><span>テクニック</span></a></li>
+				<li><a href="/user/category/list" th:href="@{/user/category/list}"><span>カテゴリ</span></a></li>
+				<li><a href="/user/report/list" th:href="@{/user/report/list}"><span>レポート</span></a></li>
+				<li><a href="/user/relation/list" th:href="@{/user/relation/list}"><span>リレーション</span></a></li>
+				<li><a href="/user/userinfo/list" th:href="@{/user/userinfo/list}"><span>ユーザー情報</span></a></li>
+				<li><a href="/user/data/list" th:href="@{/user/data/list}"><span>データ</span></a></li>
+			</ul>
+		</div>
+ 		<p class="right" id="right-btn">&rsaquo;</p>
+	</div>
+</div>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: base_header('テクニックリスト',~{::link},~{::script},~{::meta})">
+<link href="/css/pc_user_common.css" th:href="@{/css/pc_user_common.css}" rel="stylesheet">
+<script src="/js/pc_user_common.js" th:src="@{/js/pc_user_common.js}"></script>
+<link href="/css/pc_user_technique_list.css" th:href="@{/css/pc_user_technique_list.css}" rel="stylesheet">
+</head>
+<body>
+<div th:replace="layout/header::header"></div>
+<div class="box-wrap">
+	<div th:replace="layout/sidebarleft::sidebarleft"></div>
+	<div class="liquid" id="liquid">
+		<div th:replace="layout/userheader::userheader"></div>
+		<div th:replace="layout/usernavi::usernavi"></div>
+		<div class="userpage-title">
+			<h1>テクニックリスト <span th:text="${pageTechnique.getTotalElements()}">000</span> 件</h1>
+			<a href="/user/technique/create" th:href=@{/user/technique/create}>テクニック作成</a>
+		</div>
+		
+		<table>
+			<tbody th:each="technique : ${pageTechnique.getContent()}">
+				<tr>
+					<td rowspan="3">
+						<p th:text="'ID: ' + ${technique.techniqueid}">ID:</p>
+						<th:block th:if="${executionEnv==1}">
+							<img th:if="${technique.topimgname != null && technique.topimglocation != null}" th:src="'http://' + ${technique.topimglocation} + ':8080/upDir/'+ ${technique.topimgname}" width="120">
+						</th:block>
+						<th:block th:if="${executionEnv==2}">
+							<img th:if="${technique.topimgname != null && technique.topimglocation != null}" th:src="'https://' + ${technique.topimglocation} + '/upDir/'+ ${technique.user.userid} + '/' + ${technique.topimgname}" width="100">
+						</th:block>
+						<img th:if="${technique.topimgname == null || technique.topimglocation == null}" src="/images/noimage_b@2x.jpg" th:src="@{/images/noimage_b@2x.jpg}" width="120">
+					</td>
+					<th>タイトル</th>
+					<td colspan="3" th:text="${technique.title}">title</td>
+					<th>カテゴリ</th>
+					<td th:text="${technique.category.hname1}">category</td>
+					<th>公開設定</th>
+					<td th:text="${technique.publish.hname1}"></td>
+					<td rowspan="3">
+						<form method="GET" th:action="@{/user/technique/edit/{techniqueid}(techniqueid=${technique.techniqueid})}">
+							<input type="submit" value="編集">
+						</form>
+						<br>
+						<form method="POST" th:action="@{/user/technique/delete/{techniqueid}(techniqueid=${technique.techniqueid})}">
+							<input type="submit" value="削除">
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<th>キーワード</th>
+					<td colspan="7">
+						<span th:text="${technique.keywordnames[0] != null} ? ${technique.keywordnames[0]} : 'なし' "></span>
+						<span th:text="${technique.keywordnames[1] != null} ? '、 ' + ${technique.keywordnames[1]} : '' "></span>
+						<span th:text="${technique.keywordnames[2] != null} ? '、 ' + ${technique.keywordnames[2]} : '' "></span>
+						<span th:text="${technique.keywordnames[3] != null} ? '、 ' + ${technique.keywordnames[3]} : '' "></span>
+						<span th:text="${technique.keywordnames[4] != null} ? '、 ' + ${technique.keywordnames[4]} : '' "></span>
+					</td>
+				</tr>
+				<tr>
+					<th>説明</th>
+					<td colspan="7"><textarea class="explain-list" th:text="${technique.explain}" readonly>explain</textarea></td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="pagelink">
+			<a th:if="${pageTechnique.getNumber() >= 3}" th:href="@{/user/technique/list}" th:text="'&lt;&lt;'">0</a>
+			<a th:if="${pageTechnique.getNumber() >= 2}" th:href="@{/user/technique/list(page=${pageTechnique.getNumber()-1})}" th:text="${pageTechnique.getNumber()-1}">0</a>
+			<a th:if="${pageTechnique.getNumber() >= 1}" th:href="@{/user/technique/list(page=${pageTechnique.getNumber()})}" th:text="${pageTechnique.getNumber()}">0</a>
+			<span th:text="${pageTechnique.getNumber()+1}">0</span>
+			<a th:if="${(pageTechnique.getNumber()+1) < pageTechnique.getTotalPages()}" th:href="@{/user/technique/list(page=${pageTechnique.getNumber()+2})}" th:text="${pageTechnique.getNumber()+2}">0</a>
+			<a th:if="${(pageTechnique.getNumber()+2) < pageTechnique.getTotalPages()}" th:href="@{/user/technique/list(page=${pageTechnique.getNumber()+3})}" th:text="${pageTechnique.getNumber()+3}">0</a>
+			<a th:if="${(pageTechnique.getNumber()+3) < pageTechnique.getTotalPages()}" th:href="@{/user/technique/list(page=${pageTechnique.getTotalPages()})}" th:text="'&gt;&gt;'">0</a>
+		</p>
+	</div>
+</div>
+
+</body>
+</html>

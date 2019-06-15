@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="sp/layout/sp_layout :: base_header(~{::title},~{::link},~{::script},~{::meta})">
+<title>テクニック検索No.1／テクノパッド</title>
+<meta name="description" content="世界最大級のテクニック検索サイトです。自分で様々なテクニック・ハウツー・方法・やり方を検索・作成・公開することができます。">
+<meta name="keywords" content="テクノパッド,Technopad,てくのぱっど,テクニック,ハウツー,方法,やり方">
+</head>
+<body>
+<div th:replace="sp/layout/sp_header::header"></div>
+<div id="search-cover" class="search-cover" onclick="clickSearchBtn();"></div>
+<div th:replace="sp/layout/sp_navigation::navigation"></div>
+<div id="content-wrap" class="content-wrap">
+	<div class="content-box">
+		<div class="content-box-head">
+			<h2>話題のテクニック</h2>
+			<a href="/topic/list" th:href="@{/topic/list}" class="see-list">一覧を見る</a>
+		</div>
+		<div class="content-box-detail-1">
+			<div class="technique-box-1">
+				<div class="technique-box-1-img">
+					<a href=""><img src="/images/noimage_a@2x.jpg" th:src="@{/images/noimage_a@2x.jpg}"></a>
+				</div>
+				<div class="technique-box-1-content">
+					<p class="title"><a href="">タイトル</a></p>
+					<p class="username"><a href="">ユーザー名</a></p>
+					<p class="other"><a href="">アクセス数 XXX 回・5週間前</a></p>
+				</div>
+			</div>
+			<div class="technique-box-1">
+				<div class="technique-box-1-img">
+					<a href=""><img src="/images/noimage_a@2x.jpg" th:src="@{/images/noimage_a@2x.jpg}"></a>
+				</div>
+				<div class="technique-box-1-content">
+					<p class="title"><a href="">タイトル</a></p>
+					<p class="username"><a href="">ユーザー名</a></p>
+					<p class="other"><a href="">アクセス数 XXX 回・5週間前</a></p>
+				</div>
+			</div>
+			<div class="technique-box-1">
+				<div class="technique-box-1-img">
+					<a href=""><img src="/images/noimage_a@2x.jpg" th:src="@{/images/noimage_a@2x.jpg}"></a>
+				</div>
+				<div class="technique-box-1-content">
+					<p class="title"><a href="">タイトル</a></p>
+					<p class="username"><a href="">ユーザー名</a></p>
+					<p class="other"><a href="">アクセス数 XXX 回・5週間前</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-box">
+		<div class="content-box-head">
+			<h2>新しいテクニック</h2>
+			<p class="see-list"><a href="/topic/list" th:href="@{/topic/list}">一覧を見る</a></p>
+		</div>
+		<div class="content-box-detail-1">
+			<div class="technique-box-2">
+				<div class="technique-box-2-img">
+					<a href=""><img src="/images/noimage_a@2x.jpg" th:src="@{/images/noimage_a@2x.jpg}"></a>
+				</div>
+				<div class="technique-box-2-content">
+					<p class="title"><a href="">タイトル</a></p>
+					<p class="username"><a href="">ユーザー名</a></p>
+					<p class="other"><a href="">アクセス数 XXX 回・5週間前</a></p>
+				</div>
+			</div>
+			<div class="technique-box-2">
+				<div class="technique-box-2-img">
+					<a href=""><img src="/images/noimage_a@2x.jpg" th:src="@{/images/noimage_a@2x.jpg}"></a>
+				</div>
+				<div class="technique-box-2-content">
+					<p class="title"><a href="">タイトル</a></p>
+					<p class="username"><a href="">ユーザー名</a></p>
+					<p class="other"><a href="">アクセス数 XXX 回・5週間前</a></p>
+				</div>
+			</div>
+			<div class="technique-box-2">
+				<div class="technique-box-2-img">
+					<a href=""><img src="/images/noimage_a@2x.jpg" th:src="@{/images/noimage_a@2x.jpg}"></a>
+				</div>
+				<div class="technique-box-2-content">
+					<p class="title"><a href="">タイトル</a></p>
+					<p class="username"><a href="">ユーザー名</a></p>
+					<p class="other"><a href="">アクセス数 XXX 回・5週間前</a></p>
+				</div>
+			</div>
+			<div class="technique-box-2">
+				<div class="technique-box-2-img">
+					<a href=""><img src="/images/noimage_a@2x.jpg" th:src="@{/images/noimage_a@2x.jpg}"></a>
+				</div>
+				<div class="technique-box-2-content">
+					<p class="title"><a href="">タイトル</a></p>
+					<p class="username"><a href="">ユーザー名</a></p>
+					<p class="other"><a href="">アクセス数 XXX 回・5週間前</a></p>
+				</div>
+			</div>
+			<div class="technique-box-2">
+				<div class="technique-box-2-img">
+					<a href=""><img src="/images/noimage_a@2x.jpg" th:src="@{/images/noimage_a@2x.jpg}"></a>
+				</div>
+				<div class="technique-box-2-content">
+					<p class="title"><a href="">タイトル</a></p>
+					<p class="username"><a href="">ユーザー名</a></p>
+					<p class="other"><a href="">アクセス数 XXX 回・5週間前</a></p>
+				</div>
+			</div>
+			<div class="technique-box-2">
+				<div class="technique-box-2-img">
+					<a href=""><img src="/images/noimage_a@2x.jpg" th:src="@{/images/noimage_a@2x.jpg}"></a>
+				</div>
+				<div class="technique-box-2-content">
+					<p class="title"><a href="">タイトル</a></p>
+					<p class="username"><a href="">ユーザー名</a></p>
+					<p class="other"><a href="">アクセス数 XXX 回・5週間前</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

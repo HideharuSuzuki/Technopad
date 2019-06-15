@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="pc/layout/pc_layout::base_header(~{::title},~{::link},~{::script},~{::meta})">
+<title th:text="${username}+'のテクニック新規作成'+ '／テクノパッド'">title</title>
+<meta name="description" th:attr="content=${username}+のテクニック新規作成画面です。">
+<meta name="keywords" content="テクノパッド,Technopad,てくのぱっど,テクニック,ハウツー,方法,やり方">
+<link href="/css/pc/pc_user_common.css" th:href="@{/css/pc/pc_user_common.css}" rel="stylesheet">
+<script src="/js/pc/pc_user_common.js" th:src="@{/js/pc/pc_user_common.js}"></script>
+</head>
+<div th:replace="pc/layout/pc_header::header"></div>
+<div class="content-wrap">
+	<div th:replace="pc/layout/pc_navigation::navigation"></div>
+	<div class="liquid" id="liquid">
+		<div class="liquid-content">
+			<div th:replace="pc/layout/pc_userheader::userheader('テクニック')"></div>
+			<div class="content-box">
+				<div class="content-box-head">
+					<p class="left-btn-link"><a href="/user/technique/list" th:href="@{/user/technique/list}">&#8592;</a></p>
+					<h1>テクニック新規作成</h1>
+				</div>
+				<div class="content-box-detail-5">
+					<div class="technique-basic-info">
+						<div class="technique-basic-info-head">
+							<p>基本情報</p>
+						</div>
+						<form method="post" enctype="multipart/form-data" th:action="@{/user/technique/create}" th:object="${techniqueForm}">
+							<input type="hidden" name="listkeywordname" id="keyword1" th:value="*{listkeywordname[0]}">
+							<input type="hidden" name="listkeywordname" id="keyword2" th:value="*{listkeywordname[1]}">
+							<input type="hidden" name="listkeywordname" id="keyword3" th:value="*{listkeywordname[2]}">
+							<input type="hidden" name="listkeywordname" id="keyword4" th:value="*{listkeywordname[3]}">
+							<input type="hidden" name="listkeywordname" id="keyword5" th:value="*{listkeywordname[4]}">
+							<div class="technique-basic-info-content">
+								<span th:if="${#fields.hasErrors('err')}" th:errors="*{err}" class="validate">error</span>
+								<br>
+								<div class="technique-basic-info-content-left">
+									<p class="label">TOP画像</p>
+									<div class="technique-image-area">
+										<label id="technique-label">
+											<img id="technique-image" src="/images/noimage_d@2x.jpg" th:src="@{/images/noimage_d@2x.jpg}" width="480" height="360">
+											<input id="technique-file" type="file" name="topimg" accept="image/*" style="display:none;">
+										</label>
+										<div>
+											<p id="technique-filename">選択されていません</p>
+											<p id="techniquefile-del"><span>削除</span></p>
+										</div>
+										<span th:if="${#fields.hasErrors('topimg')}" th:errors="*{topimg}" class="validate">error</span>
+									</div>
+									<p class="label">タイトル</p>
+									<p>
+										<input type="text" name="title" th:field="*{title}" placeholder="50文字まで">
+										<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="validate">error</span>
+									</p>
+									<br>
+									<p class="label">説明</p>
+									<p>
+										<textarea name="explain" cols="50" rows="5" th:field="*{explain}"></textarea>
+										<br>
+										<span th:if="${#fields.hasErrors('explain')}" th:errors="*{explain}" class="validate">error</span>
+									</p>
+								</div>
+								<div class="technique-basic-info-content-right">
+									<p class="label">カテゴリ</p>
+									<p class="select-wrap">
+										<select name="categoryid" th:field="*{categoryid}">
+											<option value="0"></option>
+											<option th:each="category:${listCategory}" th:value="${category.id}" th:text="${category.name}">category</option>
+										</select>
+									</p>
+									<br>
+									<span th:if="${#fields.hasErrors('categoryid')}" th:errors="*{categoryid}" class="validate">error</span>
+									<br>
+									<br>
+									<p class="label">公開設定</p>
+									<p class="select-wrap">
+										<select name="publishid" th:field="*{publishid}">
+											<option value="0"></option>
+											<option th:each="publish:${listPublish}" th:value="${publish.hid}" th:text="${publish.hname1}">category</option>
+										</select>
+									</p>
+									<br>
+									<span th:if="${#fields.hasErrors('publishid')}" th:errors="*{publishid}" class="validate">error</span>
+									<br>
+									<br>
+									<p class="label">キーワード</p>
+									<div class="keyword-area">
+										<div class="keyword-area-upper">
+											<input type="text" id="keyword-input">
+											<button type="button" value="追加" onclick="fncAddKeyword();">追加</button>
+										</div>
+										<div id="keyword-content">
+										</div>
+										<span th:if="${#fields.hasErrors('listkeywordname')}" th:errors="*{listkeywordname}" class="validate">error</span>
+									</div>
+								</div>
+							</div>
+							<input type="submit" value="新規作成">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

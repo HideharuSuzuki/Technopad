@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="pc/layout/pc_layout :: base_header(~{::title},~{::link},~{::script},~{::meta})">
+<title>ユーザー本登録完了／テクノパッド</title>
+<link href="/css/pc/pc_identity.css" th:href="@{/css/pc/pc_identity.css}" rel="stylesheet">
+<meta name="description" content="世界最大級のテクニック検索サイトです。自分で様々なテクニック・ハウツー・方法・やり方を検索・作成・公開することができます。">
+<meta name="keywords" content="テクノパッド,Technopad,てくのぱっど,テクニック,ハウツー,方法,やり方">
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+window.addEventListener('DOMContentLoaded', function() {
+	var returncode = /*[[${returncode}]]*/;
+ 	if(returncode != 1){
+		location.href="/"; // TOPリダイレクト
+	}
+})
+/*]]>*/
+</script>
+</head>
+<body>
+<div th:replace="pc/layout/pc_header::header"></div>
+<div class="content-wrap">
+	<div th:replace="pc/layout/pc_navigation::navigation"></div>
+	<div class="liquid" id="liquid">
+		<div class="content-box">
+			<div class="content-box-head">
+				<h1>ユーザー本登録完了</h1>
+			</div>
+			<div class="content-box-detail-2">
+				<p>ユーザー情報を登録しました。</p>
+				<br>
+				<p>※自動生成されたユーザー名は「<span style="font-weight:bold;" th:text="${username}"></span>」です。
+				変更する場合は<a style="color:blue;" href="/loginForm" th:href="@{/loginForm}">ログイン</a>後、ユーザー情報を編集してください。</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

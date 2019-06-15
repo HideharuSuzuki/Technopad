@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+.liquid .content-wrap{
+	
+}
+
+table {
+	border-collapse: collapse;
+}
+th,td{
+	text-align:left;
+	padding:3px 5px;
+	border:1px solid #333;
+	vertical-align: top;
+}
+
+form{
+	display:inline;
+}
+
+.explain{
+	color:#333;
+	font-weight: 400;
+}
+.explain-list{
+	margin:0;
+	padding:0;
+	font-size:12px;
+	resize: none;
+	overflow: hidden;
+	border:none;
+	line-height:150%;
+	width:100%;
+	outline: 0;
+}
+
+
+.pagelink{
+	text-align: center;
+	margin:15px auto;
+}
+
+.keyword{
+	vertical-align: middle;
+	display: inline-block;
+	position: relative;
+	border:solid 1px #aaa;
+	padding: 3px 35px 3px 5px;
+	margin:3px 3px 3px 0;
+	font-size: 0.8rem;
+	height:20px;
+	line-height:20px;
+}
+
+.keyword-name span:first-child{
+	color: orange;
+}
+.keyword-del{
+	padding: 0 5px;
+	border:solid 1px #aaa;
+	display: inline-block;
+	position: absolute;
+	top:2px;
+	right:3px;
+	
+}
+
+.keyword-del:hover {
+	cursor: pointer;
+}
+
+
+
+
+

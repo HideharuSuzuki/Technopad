@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="sp/layout/sp_layout :: base_header(~{::title},~{::link},~{::script},~{::meta})">
+<title>ユーザー仮登録／テクノパッド</title>
+<link href="/css/sp/sp_identity.css" th:href="@{/css/sp/sp_identity.css}" rel="stylesheet">
+<meta name="description" content="世界最大級のテクニック検索サイトです。自分で様々なテクニック・ハウツー・方法・やり方を検索・作成・公開することができます。">
+<meta name="keywords" content="テクノパッド,Technopad,てくのぱっど,テクニック,ハウツー,方法,やり方">
+</head>
+<body>
+<div th:replace="sp/layout/sp_header::header"></div>
+<div id="search-cover" class="search-cover" onclick="clickSearchBtn();"></div>
+<div th:replace="sp/layout/sp_navigation::navigation"></div>
+<div id="content-wrap" class="content-wrap">
+	<div class="content-box">
+		<div class="content-box-head">
+			<h1>ユーザー仮登録</h1>
+		</div>
+		<div class="content-box-detail-2">
+			<p>入力いただいたメールアドレスにユーザー登録用のURLを送信します</p>
+			<br>
+			<form method="post" th:action="@{/identity/email_registration}" th:object="${mailForm}">
+				<input type="text" name="mailaddress" th:field="*{mailaddress}" placeholder="メールアドレスを入力">
+				<span th:if="${#fields.hasErrors('mailaddress')}" th:errors="*{mailaddress}" class="validate">error</span>
+				<p><input type="submit" value="利用規約に同意して送信"></p>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

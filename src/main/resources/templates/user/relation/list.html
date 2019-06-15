@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: base_header('リレーションリスト',~{::link})"></head>
+<body>
+<div th:replace="layout/header::header"></div>
+<div th:replace="layout/naviGlobal::naviGlobal"></div>
+<div th:replace="layout/naviUser::naviUser"></div>
+<h1><span sec:authentication="principal.user.username" sec:authorize="isAuthenticated()">ユーザー名</span>のリレーションリスト</h1>
+<div th:replace="layout/footer::footer"></div>
+</body>
+</html>

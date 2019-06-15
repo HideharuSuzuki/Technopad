@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="sp/layout/sp_layout::base_header(~{::title},~{::link},~{::script},~{::meta})">
+<title>ログイン／テクノパッド</title>
+</head>
+<body>
+<div th:replace="sp/layout/sp_header::header"></div>
+<div id="search-cover" class="search-cover" onclick="clickSearchBtn();"></div>
+<div th:replace="sp/layout/sp_navigation::navigation"></div>
+<div id="content-wrap" class="content-wrap">
+	<div class="content-box">
+		<div class="content-box-head">
+			<h1>ログイン</h1>
+		</div>
+		<div class="content-box-detail-2">
+			<form name="f" th:action="@{/login}" method="post">
+				<p th:if="${param.error}" class="validate">メールアドレスまたはパスワードが正しくありません。</p>
+				<p class="label">メールアドレス</p>
+				<input type="text" name="mailaddress">
+				<br>
+				<p class="label">パスワード</p>
+				<input type="password" name="password">
+				<input type='checkbox' name='remember-me' checked>ログイン情報を保存する
+				<br>
+				<br>
+				<p><input type="submit" value="ログイン"></p>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

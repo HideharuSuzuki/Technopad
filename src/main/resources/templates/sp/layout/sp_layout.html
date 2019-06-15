@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="base_header(title,link,script,meta)">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- meta -->
+<th:block th:if="!${#strings.isEmpty(meta)}">
+	<th:block th:replace="${meta}">
+	</th:block>
+</th:block>
+
+<!-- title -->
+<th:block th:if="!${#strings.isEmpty(title)}">
+	<th:block th:replace="${title}">
+	</th:block>
+</th:block>
+
+<!-- 各ページ共通 -->
+<link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+<link href="/css/sp/sp_common.css" th:href="@{/css/sp/sp_common.css}" rel="stylesheet">
+<script src="/js/sp_common.js" th:src="@{/js/sp_common.js}"></script>
+
+<!-- 各ページ固有 -->
+<th:block th:if="!${#strings.isEmpty(link)}">
+	<th:block th:replace="${link}">
+	</th:block>
+</th:block>
+<th:block th:if="!${#strings.isEmpty(script)}">
+	<th:block th:replace="${script}">
+	</th:block>
+</th:block>
+
+</head>

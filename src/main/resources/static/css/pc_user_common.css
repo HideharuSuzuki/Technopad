@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+.liquid-content{
+	width:850px;
+	margin:0 auto;
+}
+
+/* userheader */
+.userheader{
+	margin:5px 5px 0 5px;
+}
+.userheader .bgimg{
+	background-color:#ccc;
+	width:100%;
+	height:150px;
+}
+.userheader .userheader-content{
+	background-color:#fff;
+	border-bottom:solid 1px #eee;
+	padding:10px 0;
+	
+	display: flex;
+	display: -webkit-flex;
+    -webkit-flex-wrap:nowrap;
+    -moz-flex-wrap:nowrap;
+    -ms-flex-wrap:nowrap;
+    flex-wrap:nowrap;
+    -webkit-align-items: center;
+    align-items: center;
+ }
+ /* サムネイル画像 */
+.userheader .userheader-content div:nth-child(1){
+	margin-left:10px;
+	border:solid 1px #aaa;
+	width:80px;
+	height:80px;
+	
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-o-border-radius: 2px;
+	-ms-border-radius: 2px;		
+}
+/* ユーザー名 */
+.userheader .userheader-content div:nth-child(2){
+	margin-left:30px;
+}
+.userheader .userheader-content div:nth-child(2) p{
+	line-height: 65px;
+	font-size: 1.3rem;
+}
+/* フォロワー */
+.userheader .userheader-content div:nth-child(3){
+	/*margin-left:auto;
+	margin-right:10px;*/
+	margin-left:50px;
+	background-color: blue;
+	color:#fff;
+	padding:10px 25px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-o-border-radius: 2px;
+	-ms-border-radius: 2px;	
+}
+/* usernavi */
+
+.usernavi{
+	margin:0 5px;
+}
+.usernavi ul{
+	background:#fff;
+	display: flex;
+	display: -webkit-flex;
+    -webkit-flex-wrap:nowrap;
+    -moz-flex-wrap:nowrap;
+    -ms-flex-wrap:nowrap;
+    flex-wrap:nowrap;
+    
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.usernavi ul li{
+	
+}
+.usernavi ul li a{
+	width:105px;
+	height:25px;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	padding: 10px 0 2px 0;
+	border-bottom:solid 3px #fff;
+	font-size: 0.9rem;
+	color:#999;
+}
+.usernavi ul li a:hover{
+	color:#333;
+}
+
+.usernavi ul li a span{
+	vertical-align: middle;
+}
+
+.userpage-title{
+	display: -webkit-flex;
+    display: flex;
+	margin:5px 5px 0 5px;
+	padding:8px 10px;
+	background-color: #fff;
+}
+.userpage-title h1{
+	font-size: 1rem;
+}
+.userpage-title a{
+	margin-left:auto;
+	display: block;
+}
+
+
+
+
+
+
+
+

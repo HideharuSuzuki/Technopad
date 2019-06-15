@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+.birthday{
+	display: flex;
+	display: -webkit-flex;
+    -webkit-flex-wrap:nowrap;
+    -moz-flex-wrap:nowrap;
+    -ms-flex-wrap:nowrap;
+    flex-wrap:nowrap;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.birthday p{
+	margin-right:5px;
+}
+ 
+.selectWrap{
+	position: relative;
+	display: inline-block;
+}
+.selectWrap::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border: 0px;
+  border-bottom: solid 2px #b4b3b3;
+  border-right: solid 2px #b4b3b3;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -4px;
+}
+.year_birth,
+.month_birth,
+.day_birth,
+.gender {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* width: 100%; */
+  height: 30px;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  padding: 0 40px 0 10px;
+  border: 1px solid #b4b3b3;
+  border-radius: 2px;
+}
+select::-ms-expand {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+

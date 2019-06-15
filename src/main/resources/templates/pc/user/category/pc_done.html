@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="pc/layout/pc_layout::base_header(~{::title},~{::link},~{::script},~{::meta})">
+<title th:if="${returncode==1}" th:text="${username}+'のカテゴリ新規作成完了'+ '／テクノパッド'">title</title>
+<title th:if="${returncode==2}" th:text="${username}+'のカテゴリ削除完了'+ '／テクノパッド'">title</title>
+<title th:if="${returncode==3}" th:text="${username}+'のカテゴリ編集完了'+ '／テクノパッド'">title</title>
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+window.addEventListener('DOMContentLoaded', function() {
+	var returncode = /*[[${returncode}]]*/;
+	if(returncode == 1 || returncode == 2 || returncode == 3){
+		var redirect = function(){
+			location.href="/user/category/list";
+		} 
+		setTimeout(redirect, 2000);
+	}
+	
+	if(returncode != 1 && returncode != 2 && returncode != 3){
+		location.href="/"; // TOPページ
+	}
+})
+/*]]>*/
+</script>
+</head>
+<body>
+
+<th:block th:if="${returncode==1}">
+	<p>カテゴリを新規作成しました。リストページに戻ります.....</p>
+</th:block>
+<th:block th:if="${returncode==2}">
+	<p>カテゴリを削除しました。リストページに戻ります.....</p>
+</th:block>
+<th:block th:if="${returncode==3}">
+	<p>カテゴリを編集しました。リストページに戻ります.....</p>
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="pc/layout/pc_layout::base_header(~{::title},~{::link},~{::script},~{::meta})">
+<title th:text="${username}+'のテクニックリスト'+ '／テクノパッド'">title</title>
+<meta name="description" th:attr="content=${username}+のテクニックリスト画面です。">
+<meta name="keywords" content="テクノパッド,Technopad,てくのぱっど,テクニック,ハウツー,方法,やり方">
+<link href="/css/pc/pc_user_common.css" th:href="@{/css/pc/pc_user_common.css}" rel="stylesheet">
+<script src="/js/pc/pc_user_common.js" th:src="@{/js/pc/pc_user_common.js}"></script>
+</head>
+<body>
+<div th:replace="pc/layout/pc_header::header"></div>
+<div class="content-wrap">
+	<div th:replace="pc/layout/pc_navigation::navigation"></div>
+	<div class="liquid" id="liquid">
+		<div class="liquid-content">
+			<div th:replace="pc/layout/pc_userheader::userheader('テクニック')"></div>
+			<div class="content-box">
+				<div class="content-box-head">
+					<h1>テクニックリスト</h1>
+					<p>全 <span th:text="${pageTechnique.getTotalElements()}"></span> 件</p>
+					<p th:if="${pageTechnique.totalPages>=1}"><span th:text="${pageTechnique.number+1}"></span> / <span th:text="${pageTechnique.totalPages}"></span> ﾍﾟｰｼﾞ</p>
+					<a class="right-btn-link" href="/user/technique/create" th:href="@{/user/technique/create}">新規作成</a>
+				</div>
+				
+				<!-- テクニック1件以上あり -->
+				<th:block th:if="${pageTechnique.getTotalElements() > 0}">
+					<div class="content-box-detail-3">
+						<div class="technique-list-content">
+							<div class="technique-list-label">
+								<div class="column-1"></div>
+								<div class="column-2">タイトル</div>
+								<!-- <div class="column-3">追加日時</div> -->
+								<div class="column-4">更新日時</div>
+								<div class="column-5">公開設定</div>
+								<div class="column-6">アクセス数</div>
+								<div class="column-7">レポート数</div>
+								<div class="column-8">リレーション数</div>
+								<div class="column-9">編集</div>
+								<div class="column-10">削除</div>
+							</div>
+							<div class="technique-row" th:each="technique : ${pageTechnique.getContent()}">
+								<div class="column-1">
+									<a href="#">
+										<th:block th:if="${executionEnv==1}">
+											<img th:if="${technique.topimgname != null && technique.topimglocation != null}" th:src="'http://' + ${technique.topimglocation} + ':8080/upDir/'+ ${technique.topimgname}" width="100" height="75">
+										</th:block>
+										<th:block th:if="${executionEnv==2}">
+											<img th:if="${technique.topimgname != null && technique.topimglocation != null}" th:src="'https://' + ${technique.topimglocation} + '/upDir/'+ ${technique.user.id} + '/' + ${technique.topimgname}" width="100" height="75">
+										</th:block>
+										<img th:if="${technique.topimgname == null || technique.topimglocation == null}" src="/images/noimage_b@2x.jpg" th:src="@{/images/noimage_b@2x.jpg}" width="100" height="75">
+									</a>
+								</div>
+								<div class="column-2">
+									<p th:text="'ID：' + ${#numbers.formatInteger(technique.id,8)}">ID</p>
+									<p><a href="#" th:text="${technique.title}">title</a></p>
+								</div>
+								<!-- 
+								<div class="column-3">
+									<p th:text="${#dates.format(technique.addtimestamp, 'yyyy/MM/dd')}"></p>
+									<p th:text="${#dates.format(technique.addtimestamp, 'h:mm:ss')}"></p>
+								</div>
+								-->
+								<div class="column-4">
+									<p th:text="${#dates.format(technique.updtimestamp, 'yyyy/M/dd')}"></p>
+									<p th:text="${#dates.format(technique.updtimestamp, 'h:mm:ss')}"></p>
+								</div>
+
+								<div class="column-5" th:text="${technique.publish.hname1}">000</div>
+								<div class="column-6" th:text="${technique.title}">000</div>
+								<div class="column-7" th:text="${technique.title}">000</div>
+								<div class="column-8" th:text="${technique.title}">000</div>
+								<div class="column-9"><a href="'/user/technique/edit/'+${technique.id}" th:href="@{'/user/technique/edit/'+${technique.id}}">編集</a></div>
+								<form  class="column-10" method="POST" th:action="@{/user/technique/delete/{id}(id=${technique.id})}">
+									<p><input type="submit" value="削除" onclick='return confirm("削除します。よろしいですか？");'></p>
+								</form>
+
+							</div>
+						</div>
+					</div>
+				</th:block>
+				
+				<!-- テクニック0件 -->
+				<th:block th:if="${pageTechnique.getTotalElements() == 0}">
+					<div class="content-box-detail-2">
+						<p class="no-technique">現在テクニックは作成されていません。</p>
+					</div>
+				</th:block>
+			</div>
+			
+			<div class="pagination-wrap">
+				<ul class="pagination">
+					<li th:if="${not pageTechnique.first && (pageTechnique.number+1) >= 3}"><a th:href="@{'?page='+1+'&size='+${pageTechnique.size}}">&lt;&lt;</a></li>
+					<li th:if="${not pageTechnique.first && (pageTechnique.number+1) >= 2 && pageTechnique.hasPrevious()}"><a th:href="@{'?page='+${pageTechnique.number}+'&size='+${pageTechnique.size}}">&lt;</a></li>
+					
+					<li th:if="${(pageTechnique.number-8)>=1 && (pageTechnique.number-8+10)>pageTechnique.totalPages}"><a th:href="@{'?page='+${pageTechnique.number-8}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number-8}"></a></li>
+					<li th:if="${(pageTechnique.number-7)>=1 && (pageTechnique.number-7+10)>pageTechnique.totalPages}"><a th:href="@{'?page='+${pageTechnique.number-7}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number-7}"></a></li>
+					<li th:if="${(pageTechnique.number-6)>=1 && (pageTechnique.number-6+10)>pageTechnique.totalPages}"><a th:href="@{'?page='+${pageTechnique.number-6}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number-6}"></a></li>
+					<li th:if="${(pageTechnique.number-5)>=1 && (pageTechnique.number-5+10)>pageTechnique.totalPages}"><a th:href="@{'?page='+${pageTechnique.number-5}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number-5}"></a></li>
+					<li th:if="${(pageTechnique.number-4)>=1}"><a th:href="@{'?page='+${pageTechnique.number-4}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number-4}"></a></li>
+					<li th:if="${(pageTechnique.number-3)>=1}"><a th:href="@{'?page='+${pageTechnique.number-3}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number-3}"></a></li>
+					<li th:if="${(pageTechnique.number-2)>=1}"><a th:href="@{'?page='+${pageTechnique.number-2}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number-2}"></a></li>
+					<li th:if="${(pageTechnique.number-1)>=1}"><a th:href="@{'?page='+${pageTechnique.number-1}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number-1}"></a></li>
+					<li th:if="${(pageTechnique.number)  >=1}"><a th:href="@{'?page='+${pageTechnique.number}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number}"></a></li>
+					
+					<li class="active"><a th:href="@{'?page='+${pageTechnique.number+1}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number+1}"></a></li>
+					
+					<li th:if="${(pageTechnique.number+2) >0 && (pageTechnique.number+2)<=pageTechnique.totalPages}"><a th:href="@{'?page='+${pageTechnique.number+2}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number+2}"></a></li>
+					<li th:if="${(pageTechnique.number+3) >0 && (pageTechnique.number+3)<=pageTechnique.totalPages}"><a th:href="@{'?page='+${pageTechnique.number+3}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number+3}"></a></li>
+					<li th:if="${(pageTechnique.number+4) >0 && (pageTechnique.number+4)<=pageTechnique.totalPages}"><a th:href="@{'?page='+${pageTechnique.number+4}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number+4}"></a></li>
+					<li th:if="${(pageTechnique.number+5) >0 && (pageTechnique.number+5)<=pageTechnique.totalPages}"><a th:href="@{'?page='+${pageTechnique.number+5}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number+5}"></a></li>
+					<li th:if="${(pageTechnique.number+6) >0 && (pageTechnique.number+6)<=pageTechnique.totalPages}"><a th:href="@{'?page='+${pageTechnique.number+6}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number+6}"></a></li>
+					<li th:if="${(pageTechnique.number+7) >0 && (pageTechnique.number+7)<=pageTechnique.totalPages  && (pageTechnique.number+1)<=4}"><a th:href="@{'?page='+${pageTechnique.number+7}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number+7}"></a></li>
+					<li th:if="${(pageTechnique.number+8) >0 && (pageTechnique.number+8)<=pageTechnique.totalPages  && (pageTechnique.number+1)<=3}"><a th:href="@{'?page='+${pageTechnique.number+8}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number+8}"></a></li>
+					<li th:if="${(pageTechnique.number+9) >0 && (pageTechnique.number+9)<=pageTechnique.totalPages  && (pageTechnique.number+1)<=2}"><a th:href="@{'?page='+${pageTechnique.number+9}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number+9}"></a></li>
+					<li th:if="${(pageTechnique.number+10)>0 && (pageTechnique.number+10)<=pageTechnique.totalPages && (pageTechnique.number+1)<=1}"><a th:href="@{'?page='+${pageTechnique.number+10}+'&size='+${pageTechnique.size}}" th:text="${pageTechnique.number+10}"></a></li>
+					
+					<li th:if="${not pageTechnique.last && (pageTechnique.number+1) <= (pageTechnique.totalPages-1)}"><a th:href="@{'?page='+${pageTechnique.number+2}+'&size='+${pageTechnique.size}}">&gt;</a></li>
+					<li th:if="${not pageTechnique.last && (pageTechnique.number+1) <= (pageTechnique.totalPages-2)}"><a th:href="@{'?page='+${pageTechnique.totalPages}+'&size='+${pageTechnique.size}}">&gt;&gt;</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
